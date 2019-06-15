@@ -6,7 +6,7 @@
 using namespace std;
 int main(){
 	int clave,opc,cl,edad;
-	char nombre[30];
+	char nombre[30],Nnombre[30];
 	bool encontrado;
 	ofstream guardar;
 	ifstream leer;
@@ -26,10 +26,10 @@ int main(){
 		cout<<"*************************"<<endl;
 		cout<<"Opcion -> ";
 		cin>>opc;
-		Sleep(200);
-		system("cls");
+		Sleep(100);
 		switch(opc){
 			case 1:
+				system("cls");
 				cout<<"_____________________"<<endl;
 				cout<<"    INGRESAR DATOS   "<<endl;
 				cout<<"_____________________"<<endl;
@@ -43,6 +43,7 @@ int main(){
 				guardar<<nombre<<" "<<clave<<" "<<edad<<endl;
 				break;
 			case 2:
+				system("cls");
 				leer.open("ejemplo3.txt");
 				leer>>nombre;
 				cout<<"_____________________"<<endl;
@@ -62,6 +63,7 @@ int main(){
 				leer.close();
 				break;
 			case 3:
+				system("cls");
 				leer.open("ejemplo3.txt");
 				leer>>nombre;
 				encontrado = false;
@@ -85,21 +87,26 @@ int main(){
 				if(encontrado == false){
 					cout<<"\nClave no encontrada..."<<endl;
 				}
+				
+				leer.close();
 				system("pause");
 				system("cls");
-				leer.close();
 				break;
 			case 4:
+				system("cls");
 				leer.open("ejemplo3.txt");
 				temp.open("temp.txt");
 				leer>>nombre;
 				encontrado = false;
-				cout<<"Ingrese clave a buscar: ";
+				cout<<"_____________________"<<endl;
+				cout<<"    ELIMINAR DATOS   "<<endl;
+				cout<<"_____________________"<<endl;
+				cout<<"Ingrese clave a eliminar: ";
 				cin>>cl;
 				while(!leer.eof()){
 					leer>>clave>>edad;
 					if(clave == cl){
-						encontrado == true;
+						encontrado = true;
 						cout<<"_____________________"<<endl;
 						cout<<"Nonbre: "<<nombre<<endl;
 						cout<<"Clave: "<<clave<<endl;
@@ -114,10 +121,60 @@ int main(){
 				if(encontrado == false){
 					cout<<"\nClave no encontrada..."<<endl;
 				}
+				
+				leer.close();
+				guardar.close();
+				temp.close();
+				remove("ejemplo3.txt");
+				rename("temp.txt","ejemplo3.txt");
 				system("pause");
 				system("cls");
-				leer.close();
 				break;
+			case 5:
+				system("cls");
+				leer.open("ejemplo3.txt");
+				temp.open("temp.txt");
+				leer>>nombre;
+				encontrado = false;
+				cout<<"_____________________"<<endl;
+				cout<<"   MODIFICAR DATOS   "<<endl;
+				cout<<"_____________________"<<endl;
+				cout<<"Ingrese clave a modificar: ";
+				cin>>cl;
+				while(!leer.eof()){
+					leer>>clave>>edad;
+					if(clave == cl){
+						encontrado = true;
+						cout<<"_____________________"<<endl;
+						cout<<"Nonbre: "<<nombre<<endl;
+						cout<<"Clave: "<<clave<<endl;
+						cout<<"Edad: "<<edad<<endl;
+						cout<<"_____________________"<<endl;
+						cout<<"Ingrese nuevo nombre: ";
+						cin>>Nnombre;
+						temp<<Nnombre<<" "<<clave<<" "<<edad<<endl;
+						cout<<"\nMODIFICADO"<<endl;
+					}else{
+						temp<<nombre<<" "<<clave<<" "<<edad<<endl;
+					}
+					leer>>nombre;
+				}
+				if(encontrado == false){
+					cout<<"\nClave no encontrada..."<<endl;
+				}
+				
+				leer.close();
+				guardar.close();
+				temp.close();
+				remove("ejemplo3.txt");
+				rename("temp.txt","ejemplo3.txt");
+				system("pause");
+				system("cls");
+				break;
+			default:
+				if(opc != 0){
+					system("cls"); 
+				}
 		}
 	}while(opc != 0);
 	return 0;
