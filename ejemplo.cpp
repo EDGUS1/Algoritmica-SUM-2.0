@@ -5,7 +5,7 @@
 #include<windows.h>
 using namespace std;
 int main(){
-	int clave,opc,cl,edad;
+	int clave,opc,cl,edad,nota,nota1,nota3;
 	char nombre[30],Nnombre[30];
 	bool encontrado;
 	ofstream guardar;
@@ -41,6 +41,10 @@ int main(){
 				cout<<"Ingrese edad: ";
 				cin>>edad;
 				guardar<<nombre<<" "<<clave<<" "<<edad<<endl;
+				cout<<"\n";
+				leer.close();
+				system("pause");
+				system("cls");
 				break;
 			case 2:
 				system("cls");
@@ -58,9 +62,9 @@ int main(){
 					cout<<"_____________________"<<endl;
 					leer>>nombre;
 				}
+				leer.close();
 				system("pause");
 				system("cls");
-				leer.close();
 				break;
 			case 3:
 				system("cls");
@@ -87,7 +91,7 @@ int main(){
 				if(encontrado == false){
 					cout<<"\nClave no encontrada..."<<endl;
 				}
-				
+				cout<<"\n";
 				leer.close();
 				system("pause");
 				system("cls");
@@ -112,7 +116,7 @@ int main(){
 						cout<<"Clave: "<<clave<<endl;
 						cout<<"Edad: "<<edad<<endl;
 						cout<<"_____________________"<<endl;
-						cout<<"ELIMINADO"<<endl;
+						cout<<"\nELIMINADO\n\n";
 					}else{
 						temp<<nombre<<" "<<clave<<" "<<edad<<endl;
 					}
@@ -121,7 +125,7 @@ int main(){
 				if(encontrado == false){
 					cout<<"\nClave no encontrada..."<<endl;
 				}
-				
+				cout<<"\n";
 				leer.close();
 				guardar.close();
 				temp.close();
@@ -162,7 +166,7 @@ int main(){
 				if(encontrado == false){
 					cout<<"\nClave no encontrada..."<<endl;
 				}
-				
+				cout<<"\n";
 				leer.close();
 				guardar.close();
 				temp.close();
