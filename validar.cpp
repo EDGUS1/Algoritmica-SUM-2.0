@@ -1,5 +1,6 @@
 #include<iostream>
 #include<cstdlib>
+#include<conio.h>
 using namespace std;
 int tomarInt();
 bool tipoIntValido (string);
@@ -15,6 +16,7 @@ int tomarInt(){
 	
 	while (!valido){
 		try{
+			system("cls");
 			cout<<"ingrese numero: ";
 			getline(cin,num);
 			valido = tipoIntValido(num);
@@ -24,6 +26,7 @@ int tomarInt(){
 		}
 		catch (string e){
 			cout<<e<<" no valido"<<endl;
+			getch();
 		}
 	}
 	return atoi(num.c_str());
