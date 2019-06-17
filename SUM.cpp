@@ -61,7 +61,7 @@ void menu1(){
 		cout<<"*************************"<<endl;
 		cout<<"*************************"<<endl;
 		cout<<"Opcion -> ";
-		cin>>opc;	
+		opc = tomarInt();	
 		Sleep(300);
 		switch(opc){
 			case 1: newIngre(); break;
@@ -134,7 +134,7 @@ void buscar(){
 	cout<<"  BUSQUEDA DE DATOS  "<<endl;
 	cout<<"_____________________"<<endl;
 	cout<<"Ingrese codigo a buscar: ";
-	cin>>cl;
+	cl = tomarInt();
 	while(!leer.eof()){
 		leer>>clave>>edad>>nota1;
 		if(clave == cl){
@@ -166,7 +166,7 @@ void borrar(){
 	cout<<"    ELIMINAR DATOS   "<<endl;
 	cout<<"_____________________"<<endl;
 	cout<<"Ingrese codigo a eliminar: ";
-	cin>>cl;
+	cl = tomarInt();
 	while(!leer.eof()){
 		leer>>clave>>edad>>nota1;
 		if(clave == cl){
@@ -205,7 +205,7 @@ void modificar(){
 	cout<<"   MODIFICAR DATOS   "<<endl;
 	cout<<"_____________________"<<endl;
 	cout<<"Ingrese codigo a modificar: ";
-	cin>>cl;
+	cl = tomarInt();
 	while(!leer.eof()){
 		leer>>clave>>edad>>nota1;
 		if(clave == cl){
@@ -293,12 +293,13 @@ void menu2(){
   		cout<<"*****************"<<endl;
         log.close();
   		cout<<"Opcion -> ";
-		cin>>opcion;
+		opcion = tomarInt();
 		Sleep(500);
   		switch(opcion){
   			case 1: loge(); break;
   			case 2: ingresolog(); break;
 	        case 3: break;
+//	        default: menu2();
   		}
 //  	}
 }
@@ -354,8 +355,8 @@ void ingresolog(){
     cout<<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
 	printf("NOTA: el Codigo y el Usuario No se podran modificar en un futuro");
     cout<<endl<<endl;
-    cout<<"                   Ingrese Codigo de Usuario....: ";cin>>login.auxcodigo;
-    cout<<"                   Ingrese Usuario (Nick).......: ";cin >>login.auxuser;
+    cout<<"Ingrese Codigo de Usuario....: ";cin>>login.auxcodigo;
+    cout<<"Ingrese Usuario .............: ";cin >>login.auxuser;
     consultal>>login.codigo1;
     while(!consultal.eof())
     {
@@ -374,11 +375,11 @@ void ingresolog(){
 
     if(repetido==false)
     {
-      	cout<<"                   Ingrese Apellidos............: ";cin>>login.apellidos;
-      	cout<<"                   Ingrese Nombre...............: ";cin>>login.nombre1;
-      	cout<<"                   Ingrese Contrasena...........: ";cin>>login.contr;
+      	cout<<"Ingrese Apellidos............: ";cin>>login.apellidos;
+      	cout<<"Ingrese Nombre...............: ";cin>>login.nombre1;
+      	cout<<"Ingrese Contrasena...........: ";cin>>login.contr;
       	cout<<endl<<endl;
-      	cout<<"                            Guardado Correctamente"<<endl;
+      	cout<<"\nGuardado Correctamente"<<endl;
       	cout<<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
       	log<<login.auxcodigo<<" "<<login.apellidos<<" "<<login.nombre1<<" "<<login.auxuser<<" "<<login.contr<<endl;
     }
