@@ -40,7 +40,12 @@ struct login{
 }login;	
 
 int main(){
-	
+	cout<<"______________"<<endl;
+	cout<<"______________"<<endl;
+	cout<<"__Bienvenido__"<<endl;
+	cout<<"______________"<<endl;
+	cout<<"______________"<<endl;
+	system("pause");
 	guardar.open("ejemplo4.txt",ios::app);
 	menu2();
 
@@ -61,6 +66,7 @@ void menu1(){
 		cout<<"*************************"<<endl;
 		cout<<"*************************"<<endl;
 		cout<<"Opcion -> ";
+		fflush(stdin);
 		opc = tomarInt();	
 		Sleep(300);
 		switch(opc){
@@ -282,7 +288,7 @@ bool tipoIntValido (string nume){
 void menu2(){
 	log.open("Login.txt",ios::app);
   	int opcion;
-//  	while(opcion!=3){
+  	while(opcion!=3){
   		system("cls");
   		cout<<"*****************"<<endl;
   		cout<<"*     LOGIN     *"<<endl;
@@ -301,7 +307,7 @@ void menu2(){
 	        case 3: break;
 //	        default: menu2();
   		}
-//  	}
+  	}
 }
 void loge(){
   	system("cls");
@@ -325,8 +331,8 @@ void loge(){
   	    	cout<<"Bienvenido "<<login.nombre1<<"!!"<<endl;
         	strcpy(nombre2,login.nombre1);
         	strcpy(apellido1,login.apellidos);
-  	    	codigo=login.codigo1;
-  	    	Sleep(1500);
+  	    	codigo = login.codigo1;
+//  	    	Sleep(1500);
   	    	system("cls");
 //        	getch();
   	    	menu1();

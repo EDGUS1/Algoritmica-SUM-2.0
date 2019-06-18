@@ -1,5 +1,0 @@
-nombre: ed
-apellido: ed
-direccion: ed
-telefono: 2
- 3
