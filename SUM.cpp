@@ -40,11 +40,11 @@ struct login{
 }login;	
 
 int main(){
-	cout<<"______________"<<endl;
-	cout<<"______________"<<endl;
-	cout<<"__Bienvenido__"<<endl;
-	cout<<"______________"<<endl;
-	cout<<"______________"<<endl;
+	cout<<"\n\n\n\n\n\n\t\t\t\t__________________"<<endl;
+	cout<<"\t\t\t\t__________________"<<endl;
+	cout<<"\t\t\t\t____Bienvenido____"<<endl;
+	cout<<"\t\t\t\t__________________"<<endl;
+	cout<<"\t\t\t\t__________________\n\n\n\n\n\n"<<endl;
 	system("pause");
 	guardar.open("ejemplo4.txt",ios::app);
 	menu2();
@@ -259,8 +259,8 @@ int tomarInt(){
 		}
 		catch (string e){
 			cout<<e<<" no valido "<<endl;
-//			Sleep(500);
-			getch();
+			Sleep(1000);
+//			getch();
 //			system("cls");
 		}
 	}
@@ -392,6 +392,7 @@ void ingresolog(){
 
     log.close();
     consultal.close();
-    getch();
+    Sleep(500);
+//    getch();
 }
 
