@@ -14,15 +14,19 @@ ofstream temp;
 ofstream guardar;
 ifstream consultal;
 ofstream log;
+ifstream consultal2;
+ofstream log2;
 
 //variables globales
-int clave,opc,cl,edad,nota,nota1,nota2,codigo;
-char nombre[30],Nnombre[30],apellido1[30],nombre2[30];
+int clave,opc,cl,codigo,edad,codigo10;
+double prom,falta,nota1,nota2,nota3;
+char nombre[30],Nnombre[30],apellido1[30],nombre2[30],nombre10[30],Nnombre10[30],apellido10[30],nombre20[30];
 bool encontrado;
 
 //funciones
 void menu1();
 void menu2();
+void menuAlumn();
 void newIngre();
 void mostrar();
 void buscar();
@@ -30,6 +34,7 @@ void borrar();
 void modificar();
 void loge();
 void ingresolog();
+void ingresolog2();
 int tomarInt();
 bool tipoIntValido (string);
 
@@ -38,13 +43,18 @@ struct login{
 	int codigo1,auxcodigo;
   	char nombre1[30],user[30],iuser[30],contr[30],icontr[30],apellidos[30],auxnombre[30],auxuser[30],auxiuser[30],auxcontr[30],auxicontr[30],auxapellidos[30];
 }login;	
+struct login2{
+	int codigo10,auxcodigo10;
+  	char nombre10[30],user10[30],iuser10[30],contr10[30],icontr10[30],apellidos10[30],auxnombre10[30],auxuser10[30],auxiuser10[30],auxcontr10[30],auxicontr10[30],auxapellidos10[30];
+}login2;	
 
 int main(){
 	cout<<"\n\n\n\n\n\n\t\t\t\t__________________"<<endl;
 	cout<<"\t\t\t\t__________________"<<endl;
-	cout<<"\t\t\t\t____Bienvenido____"<<endl;
+	cout<<"\t\t\t\t___ Bienvenido ___"<<endl;
 	cout<<"\t\t\t\t__________________"<<endl;
 	cout<<"\t\t\t\t__________________\n\n\n\n\n\n"<<endl;
+	cout.precision(2);
 	system("pause");
 	guardar.open("ejemplo4.txt",ios::app);
 	menu2();
@@ -87,19 +97,29 @@ void menu1(){
 }
 void newIngre(){
 	system("cls");
-	cout<<"_____________________"<<endl;
-	cout<<"    INGRESAR DATOS   "<<endl;
-	cout<<"_____________________"<<endl;
-	cout<<"Ingrese nombre: ";
+	cout<<"    _____________________"<<endl;
+	cout<<"        INGRESAR DATOS   "<<endl;
+	cout<<"    _____________________"<<endl;
+	cout<<"Ingrese nombre.......................: ";
 	fflush(stdin);
 	cin.getline(nombre,30,'\n');
-	cout<<"Ingrese codigo: ";
+	cout<<"Ingrese codigo.......................: ";
 	clave = tomarInt();
-	cout<<"Ingrese edad: ";
+	cout<<"Ingrese edad.........................: ";
 	edad = tomarInt();
-	cout<<"Ingrese nota 1: ";
+	cout<<"Ingrese nota del examen parcial......: ";
 	nota1 = tomarInt();
-	guardar<<nombre<<" "<<clave<<" "<<edad<<" "<<nota1<<endl;
+	cout<<"Ingrese nota del examen final........: ";
+	nota2 = tomarInt();
+	cout<<"Ingrese nota de evaluacion continua..: ";
+	nota3 = tomarInt();
+	prom = (nota1+nota2+nota3)/3;
+	if(prom > 10.5){
+		falta = 0;
+	}else{
+		falta = 10.5 - prom;
+	}
+	guardar<<nombre<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
 	cout<<"\n";
 	leer.close();
 	system("pause");
@@ -109,22 +129,22 @@ void mostrar(){
 	system("cls");
 	leer.open("ejemplo4.txt");
 	leer>>nombre;
-	cout<<"_____________________"<<endl;
-	cout<<"    MOSTRAR DATOS    "<<endl;
-	cout<<"_____________________"<<endl;
+	cout<<"    _____________________"<<endl;
+	cout<<"        MOSTRAR DATOS    "<<endl;
+	cout<<"    _____________________"<<endl;
 	while(!leer.eof()){
-		leer>>clave>>edad>>nota1;
-		cout<<"_____________________"<<endl;
-		cout<<"Nombre  :\t "<<nombre<<endl;
-		cout<<"Apellido:\t "<<nombre<<endl;
-		cout<<"Codigo  :\t "<<clave<<endl;
-		cout<<"Edad    :\t "<<edad<<endl;
-		cout<<"Nota 1  :\t "<<nota1<<endl;
-		cout<<"Nota 2  :\t "<<nota1<<endl;
-		cout<<"Nota 3  :\t "<<nota1<<endl;
-		cout<<"Promedio:\t "<<nota1<<endl;
-		cout<<"Nota faltante:\t "<<nota1<<endl;
-		cout<<"_____________________"<<endl;
+		leer>>clave>>edad>>nota1>>nota2>>nota3>>prom>>falta;
+		cout<<"______________________________________"<<endl;
+		cout<<"Nombre.........................: "<<nombre<<endl;
+		cout<<"Apellido.......................: "<<nombre<<endl;
+		cout<<"Codigo.........................: "<<clave<<endl;
+		cout<<"Edad...........................: "<<edad<<endl;
+		cout<<"Nota del parcial...............: "<<nota1<<endl;
+		cout<<"Nota del final.................: "<<nota2<<endl;
+		cout<<"Nota de la evaluacion continua.: "<<nota3<<endl;
+		cout<<"Promedio.......................: "<<prom<<endl;
+		cout<<"Nota faltante para aprobar.....: "<<falta<<endl;
+		cout<<"______________________________________"<<endl;
 		leer>>nombre;
 	}
 	leer.close();
@@ -136,21 +156,26 @@ void buscar(){
 	leer.open("ejemplo4.txt");
 	leer>>nombre;
 	encontrado = false;
-	cout<<"_____________________"<<endl;
-	cout<<"  BUSQUEDA DE DATOS  "<<endl;
-	cout<<"_____________________"<<endl;
+	cout<<"    _____________________"<<endl;
+	cout<<"      BUSQUEDA DE DATOS  "<<endl;
+	cout<<"    _____________________"<<endl;
 	cout<<"Ingrese codigo a buscar: ";
 	cl = tomarInt();
 	while(!leer.eof()){
-		leer>>clave>>edad>>nota1;
+		leer>>clave>>edad>>nota1>>nota2>>nota3>>prom>>falta;
 		if(clave == cl){
 			encontrado = true;
-			cout<<"_____________________"<<endl;
-			cout<<"Nonbre: "<<nombre<<endl;
-			cout<<"Codigo: "<<clave<<endl;
-			cout<<"Edad: "<<edad<<endl;
-			cout<<"Nota 1: "<<nota1<<endl;
-			cout<<"_____________________"<<endl;
+			cout<<"______________________________________"<<endl;
+			cout<<"Nombre.........................: "<<nombre<<endl;
+			cout<<"Apellido.......................: "<<nombre<<endl;
+			cout<<"Codigo.........................: "<<clave<<endl;
+			cout<<"Edad...........................: "<<edad<<endl;
+			cout<<"Nota del parcial...............: "<<nota1<<endl;
+			cout<<"Nota del final.................: "<<nota2<<endl;
+			cout<<"Nota de la evaluacion continua.: "<<nota3<<endl;
+			cout<<"Promedio.......................: "<<prom<<endl;
+			cout<<"Nota faltante para aprobar.....: "<<falta<<endl;
+			cout<<"______________________________________"<<endl;
 		}
 		leer>>nombre;
 	}
@@ -168,24 +193,29 @@ void borrar(){
 	temp.open("temp1.txt");
 	leer>>nombre;
 	encontrado = false;
-	cout<<"_____________________"<<endl;
-	cout<<"    ELIMINAR DATOS   "<<endl;
-	cout<<"_____________________"<<endl;
+	cout<<"    _____________________"<<endl;
+	cout<<"        ELIMINAR DATOS   "<<endl;
+	cout<<"    _____________________"<<endl;
 	cout<<"Ingrese codigo a eliminar: ";
 	cl = tomarInt();
 	while(!leer.eof()){
-		leer>>clave>>edad>>nota1;
+		leer>>clave>>edad>>nota1>>nota2>>nota3>>prom>>falta;
 		if(clave == cl){
 			encontrado = true;
-			cout<<"_____________________"<<endl;
-			cout<<"Nonbre: "<<nombre<<endl;
-			cout<<"Codigo: "<<clave<<endl;
-			cout<<"Edad: "<<edad<<endl;
-			cout<<"Nota 1: "<<nota1<<endl;
-			cout<<"_____________________"<<endl;
+			cout<<"______________________________________"<<endl;
+			cout<<"Nombre.........................: "<<nombre<<endl;
+			cout<<"Apellido.......................: "<<nombre<<endl;
+			cout<<"Codigo.........................: "<<clave<<endl;
+			cout<<"Edad...........................: "<<edad<<endl;
+			cout<<"Nota del parcial...............: "<<nota1<<endl;
+			cout<<"Nota del final.................: "<<nota2<<endl;
+			cout<<"Nota de la evaluacion continua.: "<<nota3<<endl;
+			cout<<"Promedio.......................: "<<prom<<endl;
+			cout<<"Nota faltante para aprobar.....: "<<falta<<endl;
+			cout<<"______________________________________"<<endl;
 			cout<<"\nELIMINADO\n\n";
 		}else{
-			temp<<nombre<<" "<<clave<<" "<<edad<<" "<<nota1<<endl;
+			temp<<nombre<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
 		}
 		leer>>nombre;
 	}
@@ -213,21 +243,26 @@ void modificar(){
 	cout<<"Ingrese codigo a modificar: ";
 	cl = tomarInt();
 	while(!leer.eof()){
-		leer>>clave>>edad>>nota1;
+		leer>>clave>>edad>>nota1>>nota2>>nota3>>prom>>falta;
 		if(clave == cl){
 			encontrado = true;
-			cout<<"_____________________"<<endl;
-			cout<<"Nonbre: "<<nombre<<endl;
-			cout<<"Codigo: "<<clave<<endl;
-			cout<<"Edad: "<<edad<<endl;
-			cout<<"Nota 1: "<<nota1<<endl;
-			cout<<"_____________________"<<endl;
+			cout<<"______________________________________"<<endl;
+			cout<<"Nombre.........................: "<<nombre<<endl;
+			cout<<"Apellido.......................: "<<nombre<<endl;
+			cout<<"Codigo.........................: "<<clave<<endl;
+			cout<<"Edad...........................: "<<edad<<endl;
+			cout<<"Nota del parcial...............: "<<nota1<<endl;
+			cout<<"Nota del final.................: "<<nota2<<endl;
+			cout<<"Nota de la evaluacion continua.: "<<nota3<<endl;
+			cout<<"Promedio.......................: "<<prom<<endl;
+			cout<<"Nota faltante para aprobar.....: "<<falta<<endl;
+			cout<<"______________________________________"<<endl;
 			cout<<"Ingrese nuevo nombre: ";
 			cin>>Nnombre;
-			temp<<Nnombre<<" "<<clave<<" "<<edad<<" "<<nota1<<endl;
+			temp<<Nnombre<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
 			cout<<"\nMODIFICADO"<<endl;
 		}else{
-			temp<<nombre<<" "<<clave<<" "<<edad<<" "<<nota1<<endl;
+			temp<<nombre<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
 		}
 		leer>>nombre;
 	}
@@ -287,6 +322,7 @@ bool tipoIntValido (string nume){
 }
 void menu2(){
 	log.open("Login.txt",ios::app);
+	log2.open("Login2.txt",ios::app);
   	int opcion;
   	while(opcion!=3){
   		system("cls");
@@ -298,13 +334,16 @@ void menu2(){
   		cout<<"*               *"<<endl;
   		cout<<"*****************"<<endl;
         log.close();
+        log2.close();
   		cout<<"Opcion -> ";
+  		fflush(stdin);
 		opcion = tomarInt();
 		Sleep(500);
   		switch(opcion){
   			case 1: loge(); break;
-  			case 2: ingresolog(); break;
+  			case 2: ingresolog2(); break;
 	        case 3: break;
+	        case 13: ingresolog();break;
 //	        default: menu2();
   		}
   	}
@@ -315,11 +354,17 @@ void loge(){
     log.close();
     log.open("Login.txt",ios::app);
   	consultal.open("Login.txt",ios::in);
+  	consultal2.close();
+    log2.close();
+    log2.open("Login2.txt",ios::app);
+  	consultal2.open("Login2.txt",ios::in);
   	bool si=false;
   	cout<<"Ingrese Usuario....: ";
   	cin>>login.iuser;
+//  	login2.iuser10 = login.iuser;
     cout<<"Ingrese Contrasena.: ";
   	cin>>login.icontr;
+//  	login2.icontr10 = login.icontr;
   	consultal>>login.codigo1;
   	while(!consultal.eof())
   	{
@@ -339,6 +384,27 @@ void loge(){
   	  	}
   	  	consultal>>login.codigo1;
   	}
+  	consultal2>>login2.codigo10;
+  	while(!consultal2.eof())
+  	{
+  	  	consultal2>>login2.apellidos10>>login2.nombre10>>login2.user10>>login2.contr10;
+  	  	consultal>>login.apellidos>>login.nombre1>>login.user>>login.contr;
+  	  	if((strcmp(login2.user10, login.iuser) == 0)&&(strcmp(login2.contr10, login.icontr)==0))
+  	  	{
+  	    	si=true;
+  	    	system("cls");
+  	    	cout<<"Bienvenido "<<login2.nombre10<<"!!"<<endl;
+        	strcpy(nombre20,login2.nombre10);
+        	strcpy(apellido10,login2.apellidos10);
+  	    	codigo10 = login2.codigo10;
+//  	    	Sleep(1500);
+  	    	system("cls");
+//        	getch();
+  	    	menuAlumn();
+  	  	}
+  	  	consultal>>login.codigo1;
+  	  	consultal2>>login2.codigo10;
+  	}
   	if(si==false)
     {
       	system("cls");
@@ -347,6 +413,8 @@ void loge(){
   	}
   	consultal.close();
     log.close();
+    consultal2.close();
+    log2.close();
 }
 void ingresolog(){
   	system("cls");
@@ -361,7 +429,7 @@ void ingresolog(){
     cout<<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
 	printf("NOTA: el Codigo y el Usuario No se podran modificar en un futuro");
     cout<<endl<<endl;
-    cout<<"Ingrese Codigo de Usuario....: ";cin>>login.auxcodigo;
+    cout<<"Ingrese Codigo de Usuario....: ";login.auxcodigo = tomarInt();
     cout<<"Ingrese Usuario .............: ";cin >>login.auxuser;
     consultal>>login.codigo1;
     while(!consultal.eof())
@@ -392,6 +460,74 @@ void ingresolog(){
 
     log.close();
     consultal.close();
+    Sleep(500);
+//    getch();
+}
+void menuAlumn(){
+	int aux;
+	
+	do{
+		system("cls");
+		cout<<"MENU DE ALUMNO"<<endl;
+		cout<<"1. Buscar"<<endl;
+		cout<<"2. Mostrar"<<endl;
+		cout<<"4. Salir"<<endl;
+		cout<<"Opcion -> ";
+		fflush(stdin);
+		aux = tomarInt();
+		switch (aux){
+			case 1:buscar();break;
+			case 2:mostrar();break;
+			case 3:buscar();break;
+			case 4:break;
+		}
+		
+	}while(aux != 4);
+}
+void ingresolog2(){
+  	system("cls");
+  	log2.close();
+    consultal2.close();
+    cout<<"Creacion de Usuarios"<<endl;
+    cout<<endl<<endl;
+    bool repetido=false;
+    log2.open("Login2.txt",ios::app);
+    consultal2.open("Login2.txt");
+    cout<<endl<<endl;
+    cout<<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
+	printf("NOTA: el Codigo y el Usuario No se podran modificar en un futuro");
+    cout<<endl<<endl;
+    cout<<"Ingrese Codigo de Usuario....: ";login2.auxcodigo10 = tomarInt();
+    cout<<"Ingrese Usuario .............: ";cin >>login2.auxuser10;
+    consultal2>>login2.codigo10;
+    while(!consultal2.eof())
+    {
+      	consultal2>>login2.apellidos10>>login2.nombre10>>login2.user10>>login2.contr10;
+      	if((login2.codigo10==login2.auxcodigo10)|(strcmp(login2.user10, login2.auxuser10) == 0))
+      	{
+        	system("cls");
+			printf("Lo sentimos, Codigo o Usuario ya en Uso");
+        	repetido=true;
+        	log2.close();
+        	consultal2.close();
+        	break;
+      	}
+      	consultal2>>login2.codigo10;
+    }	
+
+    if(repetido==false)
+    {
+      	cout<<"Ingrese Apellidos............: ";cin>>login2.apellidos10;
+      	cout<<"Ingrese Nombre...............: ";cin>>login2.nombre10;
+      	cout<<"Ingrese Contrasena...........: ";cin>>login2.contr10;
+      	cout<<endl<<endl;
+      	cout<<"\nGuardado Correctamente"<<endl;
+      	cout<<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
+      	log2<<login2.auxcodigo10<<" "<<login2.apellidos10<<" "<<login2.nombre10<<" "<<login2.auxuser10<<" "<<login2.contr10<<endl;
+    }
+
+    log2.close();
+    consultal2.close();
     Sleep(500);
 //    getch();
 }
