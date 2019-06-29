@@ -19,7 +19,7 @@ ofstream log2;
 
 //variables globales
 int clave,opc,cl,codigo,edad,codigo10,x1,y1;
-double prom,falta,nota1,nota2,nota3,Nnota1,Nnota2,Nnota3,Nprom,Nfalta;
+double prom,falta,nota1,nota2,nota3;
 char nombre[30],Nnombre[30],apellido1[30],nombre2[30],nombre10[30],Nnombre10[30],apellido10[30],nombre20[30],apel[40];
 bool encontrado;
 
@@ -107,8 +107,10 @@ void newIngre(){
 	fflush(stdin);
 	cin.getline(nombre,30,'\n');
 	cout<<"Ingrese apellido.....................: ";
+	fflush(stdin);
 	cin.getline(apel,30,'\n');
 	cout<<"Ingrese codigo.......................: ";
+	fflush(stdin);
 	x1 = 39;
 	y1 = 5;
 	clave = tomarInt();
@@ -136,7 +138,7 @@ void newIngre(){
 	}
 	guardar<<nombre<<" "<<apel<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
 	cout<<"\n";
-//	leer.close();
+	leer.close();
 	system("pause");
 	system("cls");
 }
@@ -278,19 +280,9 @@ void modificar(){
 			cout<<"Promedio.......................: "<<prom<<endl;
 			cout<<"Nota faltante para aprobar.....: "<<falta<<endl;
 			cout<<"______________________________________"<<endl;
-			cout<<"Ingrese nueva nota del parcial : ";
-			cin>>Nnota1;
-			cout<<"Ingrese nueva nota del final   : ";
-			cin>>Nnota2;
-			cout<<"Ingrese nueva nota de la E.C   : ";
-			cin>>Nnota3;
-			Nprom = (Nnota1 + Nnota2 + Nnota3)/3;
-			if(Nprom < 10.5){
-				Nfalta = 10.5 - Nprom;
-			}else{
-				Nfalta = 0;
-			}
-			temp<<nombre<<" "<<apel<<" "<<clave<<" "<<edad<<" "<<Nnota1<<" "<<Nnota2<<" "<<Nnota3<<" "<<Nprom<<" "<<Nfalta<<endl;
+			cout<<"Ingrese nuevo nombre: ";
+			cin>>Nnombre;
+			temp<<Nnombre<<" "<<apel<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
 			cout<<"\nMODIFICADO"<<endl;
 		}else{
 			temp<<nombre<<" "<<apel<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
@@ -397,11 +389,13 @@ void loge(){
     log2.open("Login2.txt",ios::app);
   	consultal2.open("Login2.txt",ios::in);
   	bool si=false;
+  	cout<<"___________________________________"<<endl;
   	cout<<"Ingrese Usuario....: ";
   	cin>>login.iuser;
 //  	login2.iuser10 = login.iuser;
     cout<<"Ingrese Contrasena.: ";
-  	cin>>login.icontr;
+	cin>>login.icontr;
+	cout<<"___________________________________"<<endl;
 //  	login2.icontr10 = login.icontr;
   	consultal>>login.codigo1;
   	while(!consultal.eof())
@@ -447,7 +441,8 @@ void loge(){
     {
       	system("cls");
   		cout<<"Incorrecto Intentelo de Nuevo"<<endl;
-  		getch();
+  		Sleep(1000);
+//  		getch();
   	}
   	consultal.close();
     log.close();
@@ -456,23 +451,19 @@ void loge(){
 }
 void ingresolog(){
   	system("cls");
-//  	log.close();
-//    consultal.close();
-    cout<<"_________________________________________________________________________________"<<endl;
-	cout<<"                       Creacion de Usuarios"<<endl;
-	cout<<"_________________________________________________________________________________"<<endl;
-//    cout<<endl<<endl;
+  	log.close();
+    consultal.close();
+    cout<<"                       Creacion de Usuarios"<<endl;
+    cout<<endl<<endl;
     bool repetido=false;
     log.open("Login.txt",ios::app);
     consultal.open("Login.txt");
     cout<<endl<<endl;
-    cout<<"_________________________________________________________________________________"<<endl;
-    cout<<"_________________________________________________________________________________"<<endl;
+    cout<<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
 	printf("     NOTA: el Codigo y el Usuario No se podran modificar en un futuro");
-   
     cout<<endl<<endl;
     x1 = 31;
-	y1 = 9;
+	y1 = 8;
     cout<<"Ingrese Codigo de Usuario....: ";login.auxcodigo = tomarInt();
     cout<<"Ingrese Usuario .............: ";cin >>login.auxuser;
     consultal>>login.codigo1;
@@ -490,12 +481,15 @@ void ingresolog(){
     }	
 
     if(repetido==false){
-      	cout<<"Ingrese Apellidos............: ";cin>>login.apellidos;
-      	cout<<"Ingrese Nombre...............: ";cin>>login.nombre1;
-      	cout<<"Ingrese Contrasena...........: ";cin>>login.contr;
+    	fflush(stdin);
+      	cout<<"Ingrese Apellidos............: ";cin.getline(login.apellidos,50,'\n');
+      	fflush(stdin);
+      	cout<<"Ingrese Nombre...............: ";cin.getline(login.nombre1,50,'\n');
+      	fflush(stdin);
+      	cout<<"Ingrese Contrasena...........: ";cin.getline(login.contr,50,'\n');
       	cout<<endl<<endl;
       	cout<<"\nGuardado Correctamente"<<endl;
-      	cout<<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<en dl;
+      	cout<<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
       	log<<login.auxcodigo<<" "<<login.apellidos<<" "<<login.nombre1<<" "<<login.auxuser<<" "<<login.contr<<endl;
     }
 
@@ -544,7 +538,7 @@ void ingresolog2(){
 	printf("     NOTA: el Codigo y el Usuario No se podran modificar en un futuro");
     cout<<endl<<endl;
     x1 = 31;
-	y1 = 9;
+	y1 = 8;
     cout<<"Ingrese Codigo de Usuario....: ";login2.auxcodigo10 = tomarInt();
     cout<<"Ingrese Usuario .............: ";cin >>login2.auxuser10;
     consultal2>>login2.codigo10;
@@ -562,8 +556,10 @@ void ingresolog2(){
     }	
 
     if(repetido==false){
+    	fflush(stdin);
       	cout<<"Ingrese Apellidos............: ";cin>>login2.apellidos10;
-      	cout<<"Ingrese Nombre...............: ";cin>>login2.nombre10;
+      	fflush(stdin);
+		cout<<"Ingrese Nombre...............: ";cin>>login2.nombre10;
       	cout<<"Ingrese Contrasena...........: ";cin>>login2.contr10;
       	cout<<endl<<endl;
       	cout<<"\nGuardado Correctamente"<<endl;
@@ -584,4 +580,3 @@ void gotoxy(int a,int b){
     dwPos.Y= b;
     SetConsoleCursorPosition(hcon,dwPos);  
 }
-
