@@ -121,7 +121,7 @@ void newIngre(){
 	cout<<"Ingrese nota del examen parcial......: ";
 	x1 = 39;
 	y1 = 7;
-	nota1 = tomarInt();
+	nota1 = tomarInt();	
 	cout<<"Ingrese nota del examen final........: ";
 	x1 = 39;
 	y1 = 8;
