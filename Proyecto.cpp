@@ -57,7 +57,7 @@ int main(){
 	cout<<"\t\t\t\t__________________\n\n\n\n\n\n"<<endl;
 	cout.precision(2);
 	system("pause");
-	guardar.open("ejemplo4.txt",ios::app);
+	guardar.open("Datos.txt",ios::app);
 	menu2();
 
 	return 0;
@@ -138,13 +138,12 @@ void newIngre(){
 	}
 	guardar<<nombre<<" "<<apel<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
 	cout<<"\n";
-	leer.close();
 	system("pause");
 	system("cls");
 }
 void mostrar(){
 	system("cls");
-	leer.open("ejemplo4.txt");
+	leer.open("Datos.txt");
 	leer>>nombre;
 	cout<<"    _____________________"<<endl;
 	cout<<"        MOSTRAR DATOS    "<<endl;
@@ -170,7 +169,7 @@ void mostrar(){
 }
 void buscar(){
 	system("cls");
-	leer.open("ejemplo4.txt");
+	leer.open("Datos.txt");
 	leer>>nombre;
 	encontrado = false;
 	cout<<"    _____________________"<<endl;
@@ -208,7 +207,7 @@ void buscar(){
 }
 void borrar(){
 	system("cls");
-	leer.open("ejemplo4.txt");
+	leer.open("Datos.txt");
 	temp.open("temp1.txt");
 	leer>>nombre;
 	encontrado = false;
@@ -247,14 +246,14 @@ void borrar(){
 	leer.close();
 	guardar.close();
 	temp.close();
-	remove("ejemplo4.txt");
-	rename("temp1.txt","ejemplo4.txt");
+	remove("Datos.txt");
+	rename("temp1.txt","Datos.txt");
 	system("pause");
 	system("cls");
 }
 void modificar(){
 	system("cls");
-	leer.open("ejemplo4.txt");
+	leer.open("Datos.txt");
 	temp.open("temp1.txt");
 	leer>>nombre;
 	encontrado = false;
@@ -281,16 +280,18 @@ void modificar(){
 			cout<<"Nota faltante para aprobar.....: "<<falta<<endl;
 			cout<<"______________________________________"<<endl;
 			
-			cout<<"    MENU\n";
+			cout<<"    \n¿Que desea modificar?\n";
 			cout<<"1. Nombre\n";
 			cout<<"2. Apellido\n";
 			cout<<"3. edad\n";
 			cout<<"4. Notas\n\n";
 			cout<<"Ingrese el campo que desea modificar: ";
+			
+				
 			ax = tomarInt();
 			switch(ax){
 				case 1: 
-					cout<<"Ingrese nuevo nombre: ";
+				cout<<"Ingrese nuevo nombre: ";
 					cin>>Nnombre;
 					temp<<Nnombre<<" "<<apel<<" "<<clave<<" "<<edad<<" "<<nota1<<" "<<nota2<<" "<<nota3<<" "<<prom<<" "<<falta<<endl;
 					break;
@@ -319,7 +320,8 @@ void modificar(){
 					}
 					temp<<nombre<<" "<<apel<<" "<<clave<<" "<<edad<<" "<<Nnota1<<" "<<Nnota2<<" "<<Nnota3<<" "<<Nprom<<" "<<Nfalta<<endl;
 					break;
-			}
+			}	
+
 			
 			cout<<"\nMODIFICADO"<<endl;
 		}else{
@@ -334,8 +336,8 @@ void modificar(){
 	leer.close();
 	guardar.close();
 	temp.close();
-	remove("ejemplo4.txt");
-	rename("temp1.txt","ejemplo4.txt");
+	remove("Datos.txt");
+	rename("temp1.txt","Datos.txt");
 	system("pause");
 	system("cls");
 }
